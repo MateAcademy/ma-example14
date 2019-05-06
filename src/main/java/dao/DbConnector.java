@@ -1,6 +1,8 @@
 package dao;
 
-import java.sql.*;
+import exeption.NoConnection;
+import java.sql.Connection;
+import java.sql.DriverManager;
 
 public class DbConnector {
     private static final String url = "jdbc:mysql://localhost:3306/madb?useSSL=false&serverTimezone=UTC";
@@ -16,7 +18,7 @@ public class DbConnector {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return null;
+        return (Connection) new NoConnection();
     }
 
 }

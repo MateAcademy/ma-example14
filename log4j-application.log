@@ -418,3 +418,5 @@ java.sql.SQLSyntaxErrorException: You have an error in your SQL syntax; check th
 2019-05-06 12:19:24 DEBUG LoginServlet:40 - User with id 2 logged in system like admin
 2019-05-06 12:19:35 DEBUG UserDao:99 - SELECT * FROM madb.user WHERE name = ?;
 2019-05-06 12:19:35 DEBUG LoginServlet:37 - User with id 1 logged in system like user
+2019-05-06 12:50:29 DEBUG UserDao:99 - SELECT * FROM madb.user WHERE name = ?;
+2019-05-06 12:50:29 DEBUG LoginServlet:40 - User with id 2 logged in system like admin

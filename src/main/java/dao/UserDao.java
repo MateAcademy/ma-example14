@@ -1,15 +1,18 @@
 package dao;
 
 import model.User;
-
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.Statement;
+import java.sql.SQLException;
+import java.sql.ResultSet;
+import java.sql.PreparedStatement;
 import java.util.Optional;
 import org.apache.log4j.Logger;
 
 public class UserDao {
 
     private static final Logger logger = Logger.getLogger(UserDao.class);
-
+    Connection connection = DbConnector.connect();
 
 //    public int addUser2(User user) {
 //        Connection connection = DbConnector.connect();
@@ -32,7 +35,6 @@ public class UserDao {
 //    }
 
     public int addUser(User user) {
-        Connection connection = DbConnector.connect();
         try {
             Statement statement = connection.createStatement();
             String name = user.getName();
@@ -40,9 +42,8 @@ public class UserDao {
             String role = user.getRole();
             String sql = "INSERT INTO madb.user(name, password, role) VALUES ('" + name + "','" + password + "','"+ role +"');";
             logger.debug(sql);
-            int t = statement.executeUpdate(sql);
-            System.out.println("t= " + t);
-            return t;
+            int userAddedOrNo = statement.executeUpdate(sql);
+            return userAddedOrNo;
         } catch (SQLException e) {
             logger.error("Can't add user by name", e);
             return 0;
@@ -90,7 +91,6 @@ public class UserDao {
 //    }
 
     public Optional<User> getUserByName(String name) {
-        Connection connection = DbConnector.connect();
         try {
             final String sql = "SELECT * FROM madb.user WHERE name = ?;";
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
@@ -103,7 +103,6 @@ public class UserDao {
                 String password = resultSet.getString(3);
                 String role = resultSet.getString(4);
                 User user = new User(userId, nameUser, password, role);
-                System.out.println(user);
                 return Optional.of(user);
             }
         } catch (SQLException e) {
@@ -113,7 +112,6 @@ public class UserDao {
     }
 
     public Optional<User> getUserById(Long id) {
-        Connection connection = DbConnector.connect();
         try {
             String sql = "SELECT * FROM madb.user WHERE id =?";
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
@@ -125,7 +123,6 @@ public class UserDao {
                 String password = resultSet.getString(3);
                 String role = resultSet.getString(4);
                 User user = new User(userId, nameUser, password, role);
-                System.out.println(user);
                 return Optional.of(user);
             }
         } catch (SQLException e) {
