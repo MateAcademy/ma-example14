@@ -19,7 +19,7 @@ public class AdminServlet extends HttpServlet {
 
 //        User user = (User)req.getSession().getAttribute("user");
 //        if (user!=null && user.getRole().equals("admin")) {
-            resp.getWriter().print("Здесь вывелись все юзеры");
+//        resp.getWriter().print("Здесь вывелись все юзеры");
             req.getRequestDispatcher("adminPage.jsp").forward(req, resp);
 //        } else {
 //            req.getRequestDispatcher("accessDenied.jsp").forward(req, resp);
